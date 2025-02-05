@@ -1,6 +1,10 @@
-import { useRouter } from 'next/navigation';
+interface Props {
+  params: {
+    id: string;
+  };
+}
 
-export default function TopicPage({ params }: { params: { id: string } }) {
+export default function TopicPage({ params }: Props) {
   return (
     <main>
       <h1>Topic {params.id}</h1>
