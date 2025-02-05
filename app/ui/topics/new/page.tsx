@@ -1,12 +1,10 @@
-export default function NewTopic() {
-    return (
-      <main>
-        <h1>Create a New Topic</h1>
-        <form>
-          <label>Topic Name:</label>
-          <input type="text" name="topicName" required />
-          <button type="submit">Create</button>
-        </form>
-      </main>
-    );
-  }
+import CreateTopicForm from "@/components/CreateTopicForm";
+
+export default function Page() {
+  return (
+    <div>
+      <h1 className={`mb-4 text-xl md:text-2xl`}>New Topic</h1>
+      <CreateTopicForm />
+    </div>
+  );
+}

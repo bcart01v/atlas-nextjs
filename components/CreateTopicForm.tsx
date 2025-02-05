@@ -1,6 +1,9 @@
+import Link from "next/link";
+import { addTopic } from "@/lib/actions";
+
 export default function CreateTopicForm() {
   return (
-    <form>
+    <form action={addTopic}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         <div className="mb-4">
           <label htmlFor="title" className="mb-2 block text-sm font-medium">
@@ -20,13 +23,18 @@ export default function CreateTopicForm() {
         </div>
       </div>
       <div className="mt-6 flex justify-end gap-4">
-        <a
+        <Link
           href="/ui"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel
-        </a>
-        <button type="submit">Create Topic</button>
+        </Link>
+        <button
+          type="submit"
+          className="h-10 rounded-lg bg-primary-foreground px-6 text-sm font-medium text-black shadow-md transition-transform duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          Create Topic
+        </button>
       </div>
     </form>
   );
