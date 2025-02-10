@@ -22,14 +22,12 @@ export default async function Page({ params }: PageProps) {
         <HashtagIcon className="h-6 w-6 mr-2" /> {topic.title}
       </h1>
       <AskQuestion topic={topic.id} />
-      {questions.map((question) => (
-        <Question
-          key={question.id}
-          id={question.id}
-          text={question.title}
-          votes={question.votes}
-        />
-      ))}
+
+      <div className="mt-4 space-y-2">
+        {questions.map((question) => (
+          <Question key={question.id} id={question.id} text={question.title} votes={question.votes} />
+        ))}
+      </div>
     </div>
   );
 }

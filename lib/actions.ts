@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { insertTopic, insertQuestion, incrementVotes } from "./data";
 import { redirect } from "next/navigation";
+import { insertAnswer, markQuestionAnswerAsAccepted } from "./data";
 
 export async function addTopic(data: FormData) {
   let topic;
@@ -41,4 +42,12 @@ export async function addVote(data: FormData) {
     console.error("Error incrementing vote in database:", error);
     throw new Error("Failed to add vote.");
   }
+}
+
+export async function addAnswer(payload: { answer: string; question_id: string; }) {
+  return await insertAnswer({ answer: payload.answer, question_id: payload.question_id });
+}
+
+export async function markAnswerAsAccepted(payload: { questionId: string; answerId: string; }) {
+  return await markQuestionAnswerAsAccepted(payload.questionId, payload.answerId);
 }
