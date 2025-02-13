@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { fetchAnswers } from "@/lib/data";
 
-export async function GET(req: Request, context: { params: { id: string } }) {
+export async function GET(
+  req: Request, 
+  { params }: { params: { id: string } }
+) {
   try {
-    const { id } = context.params;
+    const { id } = params;
     const answers = await fetchAnswers(id);
 
     if (!answers || answers.length === 0) {
@@ -12,6 +15,7 @@ export async function GET(req: Request, context: { params: { id: string } }) {
 
     return NextResponse.json(answers);
   } catch (error) {
+    console.error("Error fetching answers:", error);
     return NextResponse.json({ error: "Failed to fetch answers" }, { status: 500 });
   }
 }
