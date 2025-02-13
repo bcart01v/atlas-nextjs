@@ -1,9 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import placeholder from "@/assets/placeholder.svg";
 import Link from "next/link";
-import { signIn } from "@/auth";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function Page() {
+  const router = useRouter();
   return (
     <main className="w-screen py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center">
       <div className="container px-4 md:px-6">
@@ -17,16 +21,12 @@ export default function Page() {
               scale your web applications with ease.
             </p>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-            <form
-                action={async () => {
-                  "use server";
-                  await signIn("default", { redirectTo: "/ui" });
-                }}
+              <button
+                onClick={() => signIn("github", { callbackUrl: "/ui" })}
+               className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-white shadow-md transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light disabled:pointer-events-none disabled:opacity-50"
               >
-                <button className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
-                  <div>Sign In</div>
-                </button>
-              </form>
+                Sign in with GitHub
+              </button>
               <Link
                 href="/about"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
