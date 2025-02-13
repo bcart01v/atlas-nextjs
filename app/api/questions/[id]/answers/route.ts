@@ -1,20 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchAnswers } from "@/lib/data";
 
+type RouteParams = {
+  params: {
+    id: string;
+  }
+}
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id?: string } },
+  { params }: RouteParams
 ): Promise<NextResponse> {
   try {
-    if (!params.id) {
+    const { id } = params;
+
+    if (!id) {
       return NextResponse.json(
         { error: "Question ID is required" },
         { status: 400 },
       );
     }
 
-    const answers = await fetchAnswers(params.id);
-
+    const answers = await fetchAnswers(id);
     return NextResponse.json(answers);
   } catch (error) {
     console.error("Error fetching answers:", error);
