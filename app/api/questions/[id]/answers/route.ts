@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchAnswers } from "@/lib/data";
 
+type RouteParams = {
+  params: {
+    id: string;
+  }
+}
+
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id?: string }> },
+  { params }: RouteParams
 ): Promise<NextResponse> {
   try {
-    const { id } = await context.params;
+    const { id } = params;
 
     if (!id) {
       return NextResponse.json(
