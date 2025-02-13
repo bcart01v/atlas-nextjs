@@ -3,18 +3,19 @@ import { fetchAnswers } from "@/lib/data";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id?: string } },
+  context: { params: Promise<{ id?: string }> },
 ): Promise<NextResponse> {
   try {
-    if (!params.id) {
+    const { id } = await context.params;
+
+    if (!id) {
       return NextResponse.json(
         { error: "Question ID is required" },
         { status: 400 },
       );
     }
 
-    const answers = await fetchAnswers(params.id);
-
+    const answers = await fetchAnswers(id);
     return NextResponse.json(answers);
   } catch (error) {
     console.error("Error fetching answers:", error);
