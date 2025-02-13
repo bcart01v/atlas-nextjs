@@ -11,7 +11,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/signin",
   },
-  secret: process.env.AUTH_SECRET
+  secret: process.env.AUTH_SECRET,
 });
+
+export const config = {
+  runtime: "nodejs",
+};
 
 export { handlers as GET, handlers as POST };
