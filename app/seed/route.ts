@@ -3,6 +3,11 @@ import { db } from "@vercel/postgres";
 import { users, topics, questions } from "../../lib/placeholder-data";
 import { revalidatePath } from "next/cache";
 
+export const config = {
+  runtime: "nodejs",
+};
+
+
 const client = await db.connect();
 
 async function seedUsers() {
